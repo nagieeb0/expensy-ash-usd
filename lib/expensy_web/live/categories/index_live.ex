@@ -306,7 +306,6 @@ defmodule ExpensyWeb.Categories.IndexLive do
              load: [:remaining, :is_over_budget?, :total_spent, :expenses_count, :expenses]
            )
          )
-         # Add this line
          |> reload_totals()
          |> put_flash(:info, "Category deleted successfully")}
 
@@ -319,7 +318,6 @@ defmodule ExpensyWeb.Categories.IndexLive do
              load: [:remaining, :is_over_budget?, :total_spent, :expenses_count, :expenses]
            )
          )
-         # Add this line
          |> reload_totals()
          |> put_flash(:info, "Category deleted successfully")}
 
