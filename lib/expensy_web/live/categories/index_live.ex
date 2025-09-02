@@ -36,6 +36,15 @@ defmodule ExpensyWeb.Categories.IndexLive do
     {:ok, socket}
   end
 
+  defp reload_totals(socket) do
+    total_budget = Ash.sum!(Expensy.Wallet.Category, :monthly_budget)
+    total_spent = Ash.sum!(Expensy.Wallet.Expense, :amount)
+
+    socket
+    |> assign(:total_budget, total_budget)
+    |> assign(:total_spent, total_spent)
+  end
+
   def render(assigns) do
     ~H"""
     <Layouts.app {assigns}>
@@ -297,6 +306,8 @@ defmodule ExpensyWeb.Categories.IndexLive do
              load: [:remaining, :is_over_budget?, :total_spent, :expenses_count, :expenses]
            )
          )
+         # Add this line
+         |> reload_totals()
          |> put_flash(:info, "Category deleted successfully")}
 
       {:ok, _deleted} ->
@@ -308,6 +319,8 @@ defmodule ExpensyWeb.Categories.IndexLive do
              load: [:remaining, :is_over_budget?, :total_spent, :expenses_count, :expenses]
            )
          )
+         # Add this line
+         |> reload_totals()
          |> put_flash(:info, "Category deleted successfully")}
 
       {:error, _} ->
