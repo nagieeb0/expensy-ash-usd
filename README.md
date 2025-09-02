@@ -29,7 +29,8 @@ This version demonstrates how to implement the tracker in a **resource-driven ar
 mix setup
 
  Run Ash/Postgres migrations
-mix ecto.migrate
+mix ash_postgres.create
+mix ash_postgres.migrate
 
  Seed demo data
 mix run priv/repo/seeds.exs
